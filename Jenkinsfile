@@ -13,7 +13,7 @@ pipeline {
         stage('Push') {
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/', 'nyandoo') {
+                    docker.withRegistry('https://hub.docker.com/', 'nyando7') {
                         docker.image('my-app').push('latest')
                     }
                 }
