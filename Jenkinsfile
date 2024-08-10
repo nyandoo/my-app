@@ -12,11 +12,11 @@ pipeline {
         }
         stage('Push') {
             steps {
-                script {
-                    docker.withRegistry('https://hub.docker.com/', 'nyando7') {
-                        docker.image('my-app').push('latest')
+                withCredentials([usernamePassword(credentialsId: 'ab2fd322-fb8e-41ba-928b-e454b89f28a5', passwordVariable: 'password', usernameVariable: 'username')]) 
+                    {   
+                        sh "docker login -u ${username} -p ${password}"
+                        sh 'docker push my-app:latest' 
                     }
-                }
             }
         }
         stage('Deploy') {
