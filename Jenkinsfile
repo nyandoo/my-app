@@ -3,7 +3,7 @@ pipeline {
         label 'agent'
     }
     environment {
-        MY_KUBECONFIG = credentials('my-kubeconfig')
+        MY_KUBECONFIG = credentials('kube-config')
     }
     stages {
         stage('Build') {
