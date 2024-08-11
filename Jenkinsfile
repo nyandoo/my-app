@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'agent'
     }
+    environment {
+        MY_KUBECONFIG = credentials('my-kubeconfig')
+    }
     stages {
         stage('Build') {
             steps {
@@ -22,7 +25,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    kubernetesDeploy(configs: "k8s/deployment.yaml", "k8s/service.yaml")
+                    sh("kubectl --kubeconfig $MY_KUBECONFIG get pods")
+                    // kubernetesDeploy(configs: "k8s/deployment.yaml", "k8s/service.yaml")
                 }
             }
         }
