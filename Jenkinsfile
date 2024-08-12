@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build('my-app', 'docker/')
+                    docker.build('my-app')
                 }
             }
         }
