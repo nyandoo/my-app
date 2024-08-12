@@ -2,6 +2,33 @@ pipeline {
     agent {
         label 'agent'
     }
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    docker.build('my-app', 'docker/')
+                }
+            }
+        }
+        stage('Deploy to Minikube') {
+            steps {
+                script {
+                    // Push Docker image to Minikube's local Docker registry
+                    sh 'eval $(minikube -p minikube docker-env) && docker tag my-app my-app:latest'
+                    
+                    // Deploy to Kubernetes
+                    sh 'kubectl apply -f kubernetes/deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/service.yaml'
+                }
+            }
+        }
+    }
+}
+
+/*pipeline {
+    agent {
+        label 'agent'
+    }
     environment {
         MY_KUBECONFIG = credentials('kube-config')
     }
@@ -32,3 +59,4 @@ pipeline {
         }
     }
 }
+*/
