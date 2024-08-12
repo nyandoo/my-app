@@ -15,8 +15,8 @@ pipeline {
                     //sh 'eval $(minikube -p minikube docker-env) && docker tag my-app my-app:latest'
                     
                     // Deploy to Kubernetes
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
+                    sh 'kubectl apply -f app/k8s/deployment.yaml'
+                    sh 'kubectl apply -f app/k8s/service.yaml'
                 }
             }
         }
