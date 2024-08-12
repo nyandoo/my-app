@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Push Docker image to Minikube's local Docker registry
-                    sh 'eval $(minikube -p minikube docker-env) && docker tag my-app my-app:latest'
+                    //sh 'eval $(minikube -p minikube docker-env) && docker tag my-app my-app:latest'
                     
                     // Deploy to Kubernetes
                     sh 'kubectl apply -f kubernetes/deployment.yaml'
